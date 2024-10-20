@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\User\UserController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\GuestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,10 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // Получение
-Route::get('/guest/{id}', [UserController::class, 'getGuest']);
+Route::get('/guest/{id}', [GuestController::class, 'getGuest']);
 // Создание
-Route::post('/guest', [UserController::class, 'addGuest']);
+Route::post('/guest', [GuestController::class, 'addGuest']);
 // Обновление
-Route::put('/guest/{id}',  [UserController::class, 'updateGuest']);
+Route::put('/guest/{id}',  [GuestController::class, 'updateGuest']);
 // Удаление
-Route::delete('/guest/{id}',  [UserController::class, 'deleteGuest']);
+Route::delete('/guest/{id}',  [GuestController::class, 'deleteGuest']);

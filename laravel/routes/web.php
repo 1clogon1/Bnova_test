@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\User\UserController;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
