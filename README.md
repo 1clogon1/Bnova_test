@@ -6,7 +6,12 @@
 
 
 					Запуск микросервиса на Docker
-1. Клонируем репозиторий
+0. Скачать Docker.
+
+1. Клонируем репозиторий:
+    1) ssh - git@gitlab.com:clogon/bnovo_test.git;
+    2) https - https://gitlab.com/clogon/bnovo_test.git$
+    3) Скачать архив и распоковать его у себя.
 
 2. Переходим в папку Laravel проекта в терминале(если не в ней находитесь):
 	cd .\laravel\
