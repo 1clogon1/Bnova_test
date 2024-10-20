@@ -45,60 +45,98 @@
 Примечание: 
 так как запросы будем выполнять на локальной машине, отправляем из по данному пути - http://localhost:8000.
 
-		GET - получение
+#GET - получение
 Для получения гостей есть два варианта запроса GET(статус код 200):
 1. http://localhost:8000/api/get/guest - получение всех данных;
 Пример успешного ответа(статус код 200):
 {
 &nbsp;"status": "success",
+
 &nbsp;"data": [
+
 &nbsp;&nbsp;{
+
 &nbsp;&nbsp;"id": 1,
+
 &nbsp;&nbsp;"name": "Максим",
+
 &nbsp;&nbsp;"surname": "Трифонов",
+
 &nbsp;&nbsp;"phone": "+79533510593",
+
 &nbsp;&nbsp;"email": "t.t.maxi0524314@gmail.com",
+
 &nbsp;&nbsp;"country": "Russian",
+
 &nbsp;&nbsp;"created_at": "2024-10-20T22:31:20.000000Z",
+
 &nbsp;&nbsp;"updated_at": "2024-10-20T22:31:20.000000Z"
+
 &nbsp;},
+
 &nbsp;{
+
 &nbsp;&nbsp;"id": 2,
+
 &nbsp;&nbsp;"name": "Олег",
+
 &nbsp;&nbsp;"surname": "Булатов",
+
 &nbsp;&nbsp;"phone": "+79533210593",
+
 &nbsp;&nbsp;"email": "t.t.maxi052314@gmail.com",
+
 &nbsp;&nbsp;"country": "Russian",
+
 &nbsp;&nbsp;"created_at": "2024-10-20T22:34:14.000000Z",
+
 &nbsp;&nbsp;"updated_at": "2024-10-20T22:34:14.000000Z"
+
 &nbsp;&nbsp;}
+
 &nbsp;]
+
 }
 
 
-2. http://localhost:8000/api/get/guest/3 - получение конкретного гостя по его id переданному в ссылке;
+3. http://localhost:8000/api/get/guest/3 - получение конкретного гостя по его id переданному в ссылке;
 Пример успешного ответа(статус код 200):
 {
 &nbsp;"status": "success",
+
 &nbsp;"data": {
+
 &nbsp;&nbsp;"id": 1,
+
 &nbsp;&nbsp;"name": "Максим",
+
 &nbsp;&nbsp;"surname": "Трифонов",
+
 &nbsp;&nbsp;"phone": "+79533510593",
+
 &nbsp;&nbsp;"email": "t.t.maxi0524314@gmail.com",
+
 &nbsp;&nbsp;"country": "Russian",
+
 &nbsp;&nbsp;"created_at": "2024-10-20T22:31:20.000000Z",
+
 &nbsp;&nbsp;"updated_at": "2024-10-20T22:31:20.000000Z"
+
 &nbsp;}
+
 } 
+
 Пример ответа когда не нашли такого id(статус код 404):
 {
+
 &nbsp;"status": "error",
+
 &nbsp;"message": "Guest not found"
+
 }
 
 
-		POST - создание
+#POST - создание
 Для создания записи о госте POST запрос(api/post/guest):
 http://localhost:8000/api/post/guest
 
@@ -114,37 +152,59 @@ http://localhost:8000/api/post/guest
 
 Получаем при успешном создание(статус код 201):
 {
+
 &nbsp;"status": "success",
+
 &nbsp;"message": "Guest added successfully"
+
 }
 
 Пример ошибки валидации при слишком короткой фамилии(статус код 422):
 {
+
 &nbsp;"status": "error",
+
 &nbsp;"data": {
+
 &nbsp;&nbsp;"surname": [
+
 &nbsp;&nbsp;&nbsp;"The surname field must be at least 3 characters."
+
 &nbsp;&nbsp;]
+
 &nbsp;},
+
 &nbsp;"message": "Error validate."
+
 }
 
 Пример ошибки если попытаться отправть в базу телефон и почту повторно тем, что уже есть в базе(статус код 422):
 {
+
 &nbsp;"status": "error",
+
 &nbsp;"data": {
+
 &nbsp;&nbsp;"phone": [
+
 &nbsp;&nbsp;&nbsp;"The phone has already been taken."
+
 &nbsp;&nbsp;],
+
 &nbsp;"email": [
+
 &nbsp;&nbsp;&nbsp;"The email has already been taken."
+
 &nbsp;&nbsp;]
+
 &nbsp;},
+
 &nbsp;"message": "Error validate."
+
 }
 
 
-		PUT - обновление
+#PUT - обновление
 Для обновления данных о госте, PUT запрос(api/put/guest):
 http://localhost:8000/api/put/guest
 
@@ -159,44 +219,73 @@ http://localhost:8000/api/put/guest
 
 Запрос успешного обновления данных(статус код 200):
 {
+
 &nbsp;"status": "success",
+
 &nbsp;"data": {
+
 &nbsp;&nbsp;"id": 2,
+
 &nbsp;&nbsp;"name": "Иввв",
+
 &nbsp;&nbsp;"surname": "Петров",
+
 &nbsp;&nbsp;"phone": "+79533510293",
+
 &nbsp;&nbsp;"email": "t.t.maxi052314@gmail.com",
+
 &nbsp;&nbsp;"country": "Russian",
+
 &nbsp;&nbsp;"created_at": "2024-10-20T22:34:14.000000Z",
+
 &nbsp;&nbsp;"updated_at": "2024-10-20T22:53:01.000000Z"
+
 &nbsp;},
+
 &nbsp;"message": "Guest updated successfully"
+
 }
 
 Запрос ошибки уникальности(статус код 422):
 {
+
 &nbsp;"status": "error",
+
 &nbsp;"data": {
+
 &nbsp;"phone": [
+
 &nbsp;&nbsp;"The phone has already been taken."
+
 &nbsp;&nbsp;]
+
 &nbsp;},
+
 &nbsp;"message": "Error validate"
+
 }
 
 Запрос ошибки валидации(статус код 422):
 {
+
 &nbsp;"status": "error",
+
 &nbsp;"data": {
+
 &nbsp;"name": [
+
 &nbsp;&nbsp;&nbsp;"The name field must be at least 3 characters."
+
 &nbsp;&nbsp;]
+
 &nbsp;},
+
 &nbsp;"message": "Error validate"
+
 }
 
 
-		DELETE - удаление
+#DELETE - удаление
 Запрос на удаления гостя:
 http://localhost:8000/api/delete/guest/1
 
@@ -205,12 +294,18 @@ http://localhost:8000/api/delete/guest/1
 
 Успешный запрос(статус код 200):
 {
+
 &nbsp;"status": "success",
+
 &nbsp;"message": "Guest deleted successfully"
+
 }
 
 Запрос ошибка, предали id гостя котого нету(статус код 404):
 {
+
 &nbsp;"status": "error",
+
 &nbsp;"message": "Guest not found"
+
 }
