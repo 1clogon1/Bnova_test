@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\User\GuestController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\GuestController;
 use Illuminate\Support\Facades\Route;
 
 /*
