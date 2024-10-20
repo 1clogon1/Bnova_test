@@ -14,10 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // Получение
-Route::get('/guest/{id}', [GuestController::class, 'getGuest']);
+Route::get('/get/guest/{id?}', [GuestController::class, 'getGuest']);
 // Создание
-Route::post('/guest', [GuestController::class, 'addGuest']);
+Route::post('/post/guest', [GuestController::class, 'addGuest']);
 // Обновление
-Route::put('/guest/{id}',  [GuestController::class, 'updateGuest']);
+Route::put('/put/guest/{id}',  [GuestController::class, 'updateGuest']);
 // Удаление
-Route::delete('/guest/{id}',  [GuestController::class, 'deleteGuest']);
+Route::delete('/delete/guest/{id}',  [GuestController::class, 'deleteGuest']);
