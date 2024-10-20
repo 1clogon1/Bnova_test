@@ -14,8 +14,11 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
+// Получение
 Route::get('/guest/{id}', [UserController::class, 'getGuest']);
+// Создание
 Route::post('/guest', [UserController::class, 'addGuest']);
+// Обновление
 Route::put('/guest/{id}',  [UserController::class, 'updateGuest']);
+// Удаление
 Route::delete('/guest/{id}',  [UserController::class, 'deleteGuest']);
