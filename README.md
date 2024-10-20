@@ -1,93 +1,209 @@
 # bnovo_test
 
+Тестовое задание PHP Backend Developer
 
 
-## Getting started
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+					Запуск микросервиса на докер
+1. Клонируем репозиторий
 
-## Add your files
+2. Переходим в папку Laravel проекта в терминале(если не в ней находитесь):
+	cd .\laravel\
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+3. Запускаем: 
+	composer install
 
-```
-cd existing_repo
-git remote add origin https://gitlab.com/clogon/bnovo_test.git
-git branch -M main
-git push -uf origin main
-```
+4. Копируем env: 
+	cp .env.example .env
 
-## Integrate with your tools
+5. Меняем данные для подключения к базе в файле .env на:
+	DB_CONNECTION=pgsql
+	DB_HOST=postgres_db
+	DB_PORT=5432
+	DB_DATABASE=laravel
+	DB_USERNAME=user
+	DB_PASSWORD=password
 
-- [ ] [Set up project integrations](https://gitlab.com/clogon/bnovo_test/-/settings/integrations)
 
-## Collaborate with your team
+6. Запускаем сборку и запуск контейнеров:
+	docker-compose up -d
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+7. Запускаем миграцию:
+	docker exec -it laravel_app php artisan migrate
 
-## Test and Deploy
 
-Use the built-in continuous integration in GitLab.
+Теперь вы можете взаимодействовать с api
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
 
-***
 
-# Editing this README
+					Запросы
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+Примечание: 
+так как запросы будем выполнять на локальной машине, отправляем из по данному пути - http://localhost:8000.
 
-## Suggestions for a good README
+Для получения гостей есть два варианта запроса GET(статус код 200):
+1. http://localhost:8000/api/get/guest - получение всех данных;
+Пример успешного ответа(статус код 200):
+{
+    "status": "success",
+    "data": [
+        {
+            "id": 1,
+            "name": "Максим",
+            "surname": "Трифонов",
+            "phone": "+79533510593",
+            "email": "t.t.maxi0524314@gmail.com",
+            "country": "Russian",
+            "created_at": "2024-10-20T22:31:20.000000Z",
+            "updated_at": "2024-10-20T22:31:20.000000Z"
+        },
+        {
+            "id": 2,
+            "name": "Олег",
+            "surname": "Булатов",
+            "phone": "+79533210593",
+            "email": "t.t.maxi052314@gmail.com",
+            "country": "Russian",
+            "created_at": "2024-10-20T22:34:14.000000Z",
+            "updated_at": "2024-10-20T22:34:14.000000Z"
+        }
+    ]
+}
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
 
-## Name
-Choose a self-explaining name for your project.
+2. http://localhost:8000/api/get/guest/3 - получение конкретного гостя по его id переданному в ссылке;
+Пример успешного ответа(статус код 200):
+{
+    "status": "success",
+    "data": {
+        "id": 1,
+        "name": "Максим",
+        "surname": "Трифонов",
+        "phone": "+79533510593",
+        "email": "t.t.maxi0524314@gmail.com",
+        "country": "Russian",
+        "created_at": "2024-10-20T22:31:20.000000Z",
+        "updated_at": "2024-10-20T22:31:20.000000Z"
+    }
+} 
+Пример ответа когда не нашли такого id(статус код 404):
+{
+    "status": "error",
+    "message": "Guest not found"
+}
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+Для создания записи о госте POST запрос(api/post/guest):
+http://localhost:8000/api/post/guest
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+Передаем:
+1. name(имя) - 1) обязательное поле, 2) Строка, 3) от 3 и до 100 символов;
+2. surname(фамилия) - 1) обязательное поле, 2) Строка, 3) от 3 и до 100 символов;
+3. phone(телефон) - 1) обязательное поле, 2) Строка, 3) от 10 и до 15 символов, 4) Уникальное;
+4. email(почта) - 1) Строка, 3) поле является электронной почтой, 4) от 5 и до 255 символов, 5) Уникальное;
+5. country(страна) - 1) Строка, 2) до 100 символов.
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+Примечанние: Если не передасть страну, то она определится по номер телефона +7 Россия или Казахстан(в зависимости от следующих цифр), +1 США или Канада(в зависимости от следующих цифр), +20 Египет и т.д.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+Получаем при успешном создание(статус код 201):
+{
+    "status": "success",
+    "message": "Guest added successfully"
+}
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+Пример ошибки валидации при слишком корткой фамилии(статус код 422):
+{
+    "status": "error",
+    "data": {
+        "surname": [
+            "The surname field must be at least 3 characters."
+        ]
+    },
+    "message": "Error validate."
+}
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+Пример ошибки если попытаться отправть в базу телефон и почту повторно тем, что уже есть в базе(статус код 422):
+{
+    "status": "error",
+    "data": {
+        "phone": [
+            "The phone has already been taken."
+        ],
+        "email": [
+            "The email has already been taken."
+        ]
+    },
+    "message": "Error validate."
+}
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+Для обновления данных о госте, PUT запрос(api/put/guest):
+http://localhost:8000/api/put/guest
 
-## License
-For open source projects, say how it is licensed.
+Передаем:
+1. name(имя) - 1) Строка, 3) от 3 и до 100 символов;
+2. surname(фамилия) - 1) Строка, 3) от 3 и до 100 символов;
+3. phone(телефон) - 1) Строка, 3) от 10 и до 15 символов, 4) Уникальное;
+4. email(почта) - 1) Строка, 3) поле является электронной почтой, 4) от 5 и до 255 символов, 5) Уникальное;
+5. country(страна) - 1) Строка, 2) до 100 символов.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+Примечание: при обновление данных на уникальность для телефона и почты не проверяется, если передали теже данные, что и есть в базе в данной аписи гостя.
+
+Запрос успешного обновления данных(статус код 200):
+{
+    "status": "success",
+    "data": {
+        "id": 2,
+        "name": "Иввв",
+        "surname": "Петров",
+        "phone": "+79533510293",
+        "email": "t.t.maxi052314@gmail.com",
+        "country": "Russian",
+        "created_at": "2024-10-20T22:34:14.000000Z",
+        "updated_at": "2024-10-20T22:53:01.000000Z"
+    },
+    "message": "Guest updated successfully"
+}
+
+Запрос ошибки уникальности(статус код 422):
+{
+    "status": "error",
+    "data": {
+        "phone": [
+            "The phone has already been taken."
+        ]
+    },
+    "message": "Error validate"
+}
+
+Запрос ошибки валидации(статус код 422):
+{
+    "status": "error",
+    "data": {
+        "name": [
+            "The name field must be at least 3 characters."
+        ]
+    },
+    "message": "Error validate"
+}
+
+Запрос на удаления гостя:
+http://localhost:8000/api/delete/guest/1
+
+Передаем:
+1) В ссылке id гостя которого хотим удалить.
+
+Успешный запрос(статус код 200):
+{
+    "status": "success",
+    "message": "Guest deleted successfully"
+}
+
+Запрос ошибка, предали id гостя котого нету(статус код 404):
+{
+    "status": "error",
+    "message": "Guest not found"
+}
