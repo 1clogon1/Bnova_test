@@ -19,15 +19,18 @@
 &nbsp;cd .\laravel\
 
 
-4. Запускаем: 
+4. Запускаем:
+
 &nbsp;composer install
 
 
-5. Копируем env: 
+6. Копируем env:
+
 &nbsp;cp .env.example .env
 
 
-6. Меняем данные для подключения к базе в файле .env на:
+7. Меняем данные для подключения к базе в файле .env на:
+
 &nbsp;DB_CONNECTION=pgsql
 
 &nbsp;DB_HOST=postgres_db
@@ -41,12 +44,14 @@
 &nbsp;DB_PASSWORD=password
 
 
-7. Запускаем сборку и запуск контейнеров:
+8. Запускаем сборку и запуск контейнеров:
+
 &nbsp;docker-compose up -d
 
 
-8. Запускаем миграцию:
-&nbsp;docker exec -it laravel_app php artisan migrate
+9. Запускаем миграцию:
+
+&nbsp;docker exec -it laravel_app php artisan migrate;
 
 
 
