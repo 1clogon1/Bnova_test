@@ -4,7 +4,9 @@
 
 ## Запуск микросервиса на Docker
 
+
 1. Скачать Docker.
+
 
 
 2. Клонируем репозиторий:
@@ -16,8 +18,10 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3) Скачать архив и распоковать его у себя.
 
 
+
 3. Переходим в папку Laravel проекта в терминале(если не в ней находитесь):
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cd .\laravel\
+
 
 
 4. Запускаем:
@@ -25,9 +29,11 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;composer install
 
 
+
 6. Копируем env:
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cp .env.example .env
+
 
 
 7. Меняем данные для подключения к базе в файле .env на:
@@ -45,9 +51,11 @@
 &nbsp;&nbsp;&nbsp;DB_PASSWORD=password
 
 
+
 8. Запускаем сборку и запуск контейнеров:
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;docker-compose up -d
+
 
 
 9. Запускаем миграцию:
