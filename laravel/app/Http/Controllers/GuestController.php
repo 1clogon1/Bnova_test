@@ -59,10 +59,10 @@ class GuestController extends Controller
             $request->merge(['phone' => $phone]);
 
             $validator = Validator::make($request->all(), [
-                'name' => 'required|string|max:100',
-                'surname' => 'required|string|max:100',
-                'phone' => 'required|string|max:20|unique:guests',
-                'email' => 'nullable|string|email|max:255|unique:guests',
+                'name' => 'required|string|max:100|min:3',
+                'surname' => 'required|string|max:100|min:3',
+                'phone' => 'required|string|max:15|min:10|unique:guests',
+                'email' => 'nullable|string|email|max:255|min:5|unique:guests',
                 'country' => 'string|max:100'
             ]);
 
@@ -78,7 +78,7 @@ class GuestController extends Controller
                 $data['country'] = $country;
             }
 
-            $guest = Guest::create($data);
+            Guest::create($data);
 
             return $this->jsonResponse('success',  null, $debugData, 'Guest added successfully', 201);
 
@@ -111,11 +111,11 @@ class GuestController extends Controller
             }
 
             $validator = Validator::make($request->all(), [
-                'name' => 'sometimes|required|string|max:100',
-                'surname' => 'sometimes|required|string|max:100',
-                'phone' => 'sometimes|required|string|max:15|unique:guests,phone,' . $id,
-                'email' => 'nullable|string|email|max:255|unique:guests,email,' . $id,
-                'country' => 'sometimes|string|max:100',
+                'name' => 'sometimes|required|string|max:100min:3',
+                'surname' => 'sometimes|required|string|max:100min:3',
+                'phone' => 'sometimes|required|string|max:15|min:10|unique:guests,phone,' . $id,
+                'email' => 'nullable|string|email|max:255|min:5|unique:guests,email,' . $id,
+                'country' => 'sometimes|string|max:100'
             ]);
 
             if ($validator->fails()) {
