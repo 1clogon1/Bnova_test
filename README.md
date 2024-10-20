@@ -47,6 +47,7 @@
 Примечание: 
 так как запросы будем выполнять на локальной машине, отправляем из по данному пути - http://localhost:8000.
 
+		GET - получение
 Для получения гостей есть два варианта запроса GET(статус код 200):
 1. http://localhost:8000/api/get/guest - получение всех данных;
 Пример успешного ответа(статус код 200):
@@ -99,7 +100,7 @@
 }
 
 
-
+		POST - создание
 Для создания записи о госте POST запрос(api/post/guest):
 http://localhost:8000/api/post/guest
 
@@ -145,7 +146,7 @@ http://localhost:8000/api/post/guest
 }
 
 
-
+		PUT - обновление
 Для обновления данных о госте, PUT запрос(api/put/guest):
 http://localhost:8000/api/put/guest
 
@@ -196,6 +197,8 @@ http://localhost:8000/api/put/guest
     "message": "Error validate"
 }
 
+
+		DELETE - удаление
 Запрос на удаления гостя:
 http://localhost:8000/api/delete/guest/1
 
