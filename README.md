@@ -8,6 +8,7 @@
 
 
 2. Клонируем репозиторий:
+
 &nbsp;1) ssh - git@gitlab.com:clogon/bnova_test.git;
 
 &nbsp;2) https - https://gitlab.com/clogon/bnova_test.git;
