@@ -8,31 +8,38 @@
 
 1. Клонируем репозиторий:
 &nbsp;1) ssh - git@gitlab.com:clogon/bnova_test.git;
+
 &nbsp;2) https - https://gitlab.com/clogon/bnova_test.git;
+
 &nbsp;3) Скачать архив и распоковать его у себя.
 
-2. Переходим в папку Laravel проекта в терминале(если не в ней находитесь):
+3. Переходим в папку Laravel проекта в терминале(если не в ней находитесь):
 &nbsp;cd .\laravel\
 
-3. Запускаем: 
+4. Запускаем: 
 &nbsp;composer install
 
-4. Копируем env: 
+5. Копируем env: 
 &nbsp;cp .env.example .env
 
-5. Меняем данные для подключения к базе в файле .env на:
+6. Меняем данные для подключения к базе в файле .env на:
 &nbsp;DB_CONNECTION=pgsql
+
 &nbsp;DB_HOST=postgres_db
+
 &nbsp;DB_PORT=5432
+
 &nbsp;DB_DATABASE=laravel
+
 &nbsp;DB_USERNAME=user
+
 &nbsp;DB_PASSWORD=password
 
 
-6. Запускаем сборку и запуск контейнеров:
+7. Запускаем сборку и запуск контейнеров:
 &nbsp;docker-compose up -d
 
-7. Запускаем миграцию:
+8. Запускаем миграцию:
 &nbsp;docker exec -it laravel_app php artisan migrate
 
 
