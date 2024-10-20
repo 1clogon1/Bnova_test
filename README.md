@@ -11,56 +11,56 @@
 
 2. Клонируем репозиторий:
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1) ssh - git@gitlab.com:clogon/bnova_test.git;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1) ssh - git@gitlab.com:clogon/bnova_test.git;
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2) https - https://gitlab.com/clogon/bnova_test.git;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2) https - https://gitlab.com/clogon/bnova_test.git;
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3) Скачать архив и распоковать его у себя.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3) Скачать архив и распоковать его у себя.
 
 
 
 3. Переходим в папку Laravel проекта в терминале(если не в ней находитесь):
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cd .\laravel\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cd .\laravel\
 
 
 
 4. Запускаем:
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;composer install
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;composer install
 
 
 
 6. Копируем env:
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cp .env.example .env
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cp .env.example .env
 
 
 
 7. Меняем данные для подключения к базе в файле .env на:
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DB_CONNECTION=pgsql
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DB_CONNECTION=pgsql
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DB_HOST=postgres_db
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DB_HOST=postgres_db
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DB_PORT=5432
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DB_PORT=5432
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DB_DATABASE=laravel
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DB_DATABASE=laravel
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DB_USERNAME=user
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DB_USERNAME=user
 
-&nbsp;&nbsp;&nbsp;DB_PASSWORD=password
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DB_PASSWORD=password
 
 
 
 8. Запускаем сборку и запуск контейнеров:
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;docker-compose up -d
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;docker-compose up -d
 
 
 
 9. Запускаем миграцию:
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;docker exec -it laravel_app php artisan migrate;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;docker exec -it laravel_app php artisan migrate;
 
 
 
