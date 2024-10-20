@@ -111,15 +111,15 @@ class GuestController extends Controller
             }
 
             $validator = Validator::make($request->all(), [
-                'name' => 'sometimes|required|string|max:100min:3',
-                'surname' => 'sometimes|required|string|max:100min:3',
-                'phone' => 'sometimes|required|string|max:15|min:10|unique:guests,phone,' . $id,
+                'name' => 'sometimes|string|max:100|min:3',
+                'surname' => 'sometimes|string|max:100|min:3',
+                'phone' => 'sometimes|string|max:15|min:10|unique:guests,phone,' . $id,
                 'email' => 'nullable|string|email|max:255|min:5|unique:guests,email,' . $id,
                 'country' => 'sometimes|string|max:100'
             ]);
 
             if ($validator->fails()) {
-                return $this->jsonResponse('error', null, $debugData, 'Error validate', 422,$validator->errors());
+                return $this->jsonResponse('error', $validator->errors(), $debugData, 'Error validate', 422);
             }
 
             $guest = Guest::findOrFail($id);
