@@ -65,11 +65,11 @@ class Controller extends BaseController
     protected function addDebugHeaders($response, $debugData)
     {
         $executionTime = round((microtime(true) - $debugData['startTime']) * 1000, 2);
-        $memoryUsed = round((memory_get_usage() - $debugData['startMemory']) / 1048576, 2);
+        $memoryUsed = round((memory_get_usage() - $debugData['startMemory']) / 1024, 2);
 
         return $response
             ->header('X-Debug-Time', "{$executionTime} ms")
-            ->header('X-Debug-Memory', "{$memoryUsed} MB");
+            ->header('X-Debug-Memory', "{$memoryUsed} KB");
     }
 
 }
