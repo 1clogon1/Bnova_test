@@ -20,11 +20,11 @@ class GuestController extends Controller
      * @param int|null $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getGuest(Request $request,$id = null)
+    public function getGuest($id = null)
     {
         $debugData = $this->startDebug();
         try {
-            if ($id) {
+            if (!empty($id)) {
                 $guest = Guest::findOrFail($id);
                 return $this->jsonResponse('success', $guest, $debugData);
             } else {
@@ -55,10 +55,13 @@ class GuestController extends Controller
     {
         $debugData = $this->startDebug();
         try {
+            $phone = preg_replace('/[^0-9+]/', '', $request->phone);
+            $request->merge(['phone' => $phone]);
+
             $validator = Validator::make($request->all(), [
                 'name' => 'required|string|max:100',
                 'surname' => 'required|string|max:100',
-                'phone' => 'required|string|max:15|unique:guests',
+                'phone' => 'required|string|max:20|unique:guests',
                 'email' => 'nullable|string|email|max:255|unique:guests',
                 'country' => 'string|max:100'
             ]);
@@ -102,6 +105,11 @@ class GuestController extends Controller
     {
         $debugData = $this->startDebug();
         try {
+            if(!empty($request->phone)){
+                $phone = preg_replace('/[^0-9+]/', '', $request->phone);
+                $request->merge(['phone' => $phone]);
+            }
+
             $validator = Validator::make($request->all(), [
                 'name' => 'sometimes|required|string|max:100',
                 'surname' => 'sometimes|required|string|max:100',
@@ -166,7 +174,7 @@ class GuestController extends Controller
         catch (Exception $e) {
             Log::error('Error deleting guest: ' . $e->getMessage(), [
                 'exception' => $e
-                ]);
+            ]);
 
             return $this->jsonResponse('error', null, $debugData, 'Error request', 500, $e->getMessage());
         }
