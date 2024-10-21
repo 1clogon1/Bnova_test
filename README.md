@@ -1,4 +1,4 @@
-# bnova_test
+# bnovo_test
 
 ## Тестовое задание PHP Backend Developer
 
